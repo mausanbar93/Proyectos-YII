@@ -32,6 +32,7 @@ class SiteController extends Controller
 		#$model=Users::model()->findAll();
 		#$this->render("index",array("model"=>$model));
 		#$this->render('index');
+		$this->layout="main";
 		$model=new LoginForm; 
 		$this->render('index',array("model"=>$model));
 	}

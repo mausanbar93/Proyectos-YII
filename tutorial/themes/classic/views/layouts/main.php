@@ -36,17 +36,32 @@
       <a class="brand" href="#">My app</a>
 
       <div class="nav-collapse collapse pull-right">
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Login</a></li>
-        </ul>
+          <?php $this->widget('zii.widgets.CMenu',array(
+            'htmlOptions'=>array("class"=>"nav"),
+            'items'=>array(
+              array('label'=>'Home', 'url'=>array('/site/index')),
+              array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+              array('label'=>'Contact', 'url'=>array('/site/contact')),
+              array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+              array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+            ),
+          )); ?>
       </div><!--/.nav-collapse -->
 
     </div>
   </div>
 </div>
+<?php if(isset($this->breadcrumbs) and $this->breadcrumbs!==array()):?>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span12">
+          <?php $this->widget('zii.widgets.CBreadcrumbs', array(
+            'links'=>$this->breadcrumbs,
+          )); ?><!-- breadcrumbs -->
+      </div>
+    </div>
+  </div>
+<?php endif?>      
 
 <?php echo $content; ?>
   
